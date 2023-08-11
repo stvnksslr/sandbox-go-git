@@ -15,7 +15,7 @@ func CheckIfError(err error) {
 		return
 	}
 
-	log.Error().Str("error: ", err.Error()).Send()
+	log.Error().Str("error", err.Error()).Send()
 	os.Exit(1)
 }
 
