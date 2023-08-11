@@ -1,7 +1,7 @@
 # Sandbox go-git
 
 ### setup
-go build
+```go build```
 
 ### run
-git remote add origin git@github.com:stvnksslr/sandbox-go-git.git
+`````./sandbox-go-git https://github.com/stvnksslr/sandbox-git.git`````
