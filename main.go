@@ -3,18 +3,11 @@ package main
 import (
 	"fmt"
 	"github.com/go-git/go-git/v5"
-	"github.com/go-git/go-git/v5/plumbing/transport/ssh"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"os"
 	"strings"
 )
-
-type repoInfo struct {
-	Url    string
-	Branch string
-	Path   string
-}
 
 // CheckIfError should be used to naively panics if an error is not nil.
 func CheckIfError(err error) {
@@ -32,28 +25,6 @@ func CheckArgs(arg ...string) {
 	if len(os.Args) < len(arg)+1 {
 		os.Exit(1)
 	}
-}
-
-func getSshKey() *ssh.PublicKeys {
-	privateKeyFile, varSet := os.LookupEnv("GIT_SSH_KEY_FILE")
-	if !varSet || privateKeyFile == "" {
-		log.Error().Msg("GIT_SSH_KEY_FILE not set")
-		os.Exit(1)
-	}
-
-	_, err := os.Stat(privateKeyFile)
-	if err != nil {
-		log.Error().Str("errorMessage", err.Error()).Msg(fmt.Sprintf("failed to read file %s", privateKeyFile))
-		os.Exit(1)
-	}
-
-	publicKeys, err := ssh.NewPublicKeysFromFile("git", privateKeyFile, "")
-	if err != nil {
-		log.Error().Str("errorMessage", err.Error()).Msg("generate publickeys failed")
-		os.Exit(1)
-	}
-
-	return publicKeys
 }
 
 // Basic example of how to clone a repository using clone options.
