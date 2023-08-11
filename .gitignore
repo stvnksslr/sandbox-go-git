@@ -17,6 +17,8 @@
 # *.iml
 # *.ipr
 
+sandbox-go-git
+
 # CMake
 cmake-build-*/
 
